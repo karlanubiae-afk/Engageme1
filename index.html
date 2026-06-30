@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Engagement Q226 — Interactive One Pager</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--bg:#f8f7f4;--sf:#fff;--sf2:#f2f1ee;--bd:#e2e1dc;--tx:#1a1917;--t2:#52514e;--mu:#8a8884;--mxo:#2260C4;--cxi:#0E8A5F;--labs:#5B38B5;--p:#B8860B;--co:#888780;--red:#C0392B;--rbg:#FDF0EE;--rtx:#8B2218;--ora:#D4600A;--obg:#FEF3E8;--otx:#7C3505;--grn:#1A7A44;--gbg:#EAF5EE;--gtx:#0F4D2A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:13px}
+.wrap{max-width:980px;margin:0 auto;padding:1.25rem 1rem 2rem}
+.page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1.5px solid var(--bd)}
+.page-title{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.page-sub{font-size:11px;color:var(--t2);margin-top:4px;display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;display:inline-block}
+.b-mxo{background:#E8EFFE;color:var(--mxo)}.b-cxi{background:#E3F5EE;color:var(--cxi)}.b-labs{background:#EDE8FB;color:var(--labs)}.b-p{background:#FBF0DB;color:var(--p)}.b-co{background:#EFEFED;color:var(--co)}.b-h{background:#FEF3E8;color:var(--ora)}.b-s{background:#EEE8FA;color:var(--labs)}
+.tldr{border-left:3px solid var(--mxo);border-radius:0 8px 8px 0;background:var(--sf);padding:.6rem .9rem;margin-bottom:.7rem}
+.tldr-t{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem;color:var(--mxo)}
+.tldr p{font-size:12px;line-height:1.6;color:var(--t2)}
+.tldr p strong{color:var(--tx);font-weight:600}
+.dv{border:none;border-top:1px solid var(--bd);margin:.8rem 0}
+.sec{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin:.05rem 0 .45rem}
+.ch{position:relative;height:220px;margin-bottom:.45rem;background:var(--sf);border-radius:10px;padding:.55rem;border:1px solid var(--bd)}
+.leg{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:.4rem;font-size:10.5px;color:var(--t2)}
+.ld{width:9px;height:9px;border-radius:2px;display:inline-block;vertical-align:middle;margin-right:2px}
+.tw{background:var(--sf);border-radius:10px;border:1px solid var(--bd);overflow:hidden;margin-bottom:.7rem}
+table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:fixed}
+th{font-size:10px;font-weight:600;color:var(--mu);text-align:left;padding:5px 7px;border-bottom:1px solid var(--bd);background:var(--sf2)}
+td{padding:4.5px 7px;border-bottom:.5px solid var(--bd);color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.nr{text-align:right;font-variant-numeric:tabular-nums}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bh{background:#FEF3E8;color:var(--ora);font-size:9px;padding:1px 5px;border-radius:3px}
+.bs{background:#EEE8FA;color:var(--labs);font-size:9px;padding:1px 5px;border-radius:3px}
+.cbar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.cbar-label{font-size:10.5px;color:var(--t2);width:96px;flex-shrink:0;text-align:right}
+.cbar-wrap{flex:1;background:var(--sf2);border-radius:3px;height:16px;position:relative;overflow:hidden}
+.cbar-fill{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:4px}
+.cbar-val{font-size:10px;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.cbar-co{flex-shrink:0;font-size:9.5px;color:var(--mu);width:84px;text-align:left;white-space:nowrap}
+.cbar-co strong{color:var(--co);font-weight:700}
+.split-insight{font-size:10.5px;line-height:1.55;color:var(--t2);background:var(--sf2);border-radius:7px;padding:.5rem .65rem;margin-bottom:.65rem}
+.split-insight strong{font-weight:700}
+.gw-toggle{font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:12px;border:1.5px solid var(--bd);cursor:pointer;background:var(--sf);color:var(--t2);user-select:none}
+.gw-toggle.act{background:var(--mxo);color:#fff;border-color:var(--mxo)}
+.gen-ins{background:var(--sf);border-radius:9px;border:1px solid var(--bd);padding:.55rem .75rem}
+.gen-ins-lb{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.25rem}
+.gen-ins-tx{font-size:11px;color:var(--t2);line-height:1.45}
+.fp-card{border-radius:9px;padding:.6rem .85rem;display:flex;gap:10px}
+.fp-tag{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px;border-radius:12px;align-self:flex-start;white-space:nowrap}
+.fp-title{font-size:11.5px;font-weight:700;margin-bottom:.2rem}
+.fp-tx{font-size:11px;color:var(--t2);line-height:1.45}
+.vb-section{background:#F4F2EE;border:2px solid #D8D4CC;border-radius:16px;padding:1.1rem 1.2rem 1.3rem;margin:1.5rem 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="page-hdr">
+  <div>
+    <div class="page-title">Engagement Q2 2026 — Interactive One Pager</div>
+    <div class="page-sub">
+      <span class="badge b-mxo">MXO</span><span class="badge b-cxi">CXI</span><span class="badge b-labs">LABS</span><span class="badge b-p">P</span><span class="badge b-co">Company</span>
+      <span class="badge b-h">Hourly</span><span class="badge b-s">Salary</span>
+      <span style="color:var(--mu)">·</span><span>Q226 · Jun 29, 2026 · 99% participation · N=2,083</span>
+    </div>
+  </div>
+  <div style="font-size:10px;color:var(--mu);text-align:right;flex-shrink:0">Confidential<br>HR Analytics</div>
+</div>
+
+<div class="tldr" style="border-left-color:#1a1917">
+  <div class="tldr-t" style="color:#1a1917">Executive TLDR</div>
+  <p><strong>99% participation</strong> across all orgs vs 87% company. Company benchmark for Q226: WES 8, ITS 76%, Career Growth 57%, Mgr Feedback 80%, Belonging 78% — the same figures apply across both Hourly and Salary, since Company is one company-wide signal, not split by type. MXO leads Hourly WES (39). CXI leads ITS Hourly (90%) and Career Growth Salary (74%). LABS leads Mgr Feedback (91% H) and Career Growth among Hourly (72%). <strong>P (Prabir Adarkar, N=361, Salary-only)</strong> is the largest Salary population in the folder and sits well above Company on every metric: WES 29, ITS 92%, Growth 67%, Mgr Feedback 84%, Belonging 82% — a stable, well-resourced org acting as the de-facto Salary benchmark. <strong>Career Growth is the universal floor</strong> — Company itself sits at just 57%, the lowest dimension in the entire dataset. WES collapses further in Salary for both MXO (39→25) and CXI (24→7), while P holds steady at 29. CXI Salary WES=7 is the steepest single-quarter drop (−26 pts vs P's own Q126 trajectory). AI Fluency is 95–100% everywhere but Daily Usage lags — access friction, not willingness.</p>
+</div>
+
+<!-- ═══ PARTICIPATION RATE ═══ -->
+<div class="dv" style="margin:.5rem 0"></div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.45rem;flex-wrap:wrap;gap:8px">
+  <div class="sec" style="margin:0">Participation Rate — comparative vs Company benchmark</div>
+  <div style="display:flex;gap:4px">
+    <div id="pbtn-h" onclick="switchPartChart('h')" class="gw-toggle act">Hourly</div>
+    <div id="pbtn-s" onclick="switchPartChart('s')" class="gw-toggle">Salary</div>
+  </div>
+</div>
+<div id="leg-part" class="leg"></div>
+<div style="background:var(--sf);border-radius:10px;border:1px solid var(--bd);padding:.6rem .7rem;margin-bottom:.5rem">
+  <div style="position:relative;height:200px"><canvas id="c-part"></canvas></div>
+  <div id="part-kpi-h" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:.5rem">
+    <div style="background:var(--gbg);border-radius:8px;padding:.45rem .6rem;border:1px solid #C3E6CB">
+      <div style="font-size:18px;font-weight:700;color:var(--grn);font-variant-numeric:tabular-nums">99%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">MXO H · N=515</div>
+      <div style="font-size:9px;color:var(--mu)">Rollup: MXO</div>
+    </div>
+    <div style="background:var(--gbg);border-radius:8px;padding:.45rem .6rem;border:1px solid #C3E6CB">
+      <div style="font-size:18px;font-weight:700;color:var(--grn);font-variant-numeric:tabular-nums">100%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">CXI H · N=981</div>
+      <div style="font-size:9px;color:var(--mu)">Rollup: CXI</div>
+    </div>
+    <div style="background:var(--gbg);border-radius:8px;padding:.45rem .6rem;border:1px solid #C3E6CB">
+      <div style="font-size:18px;font-weight:700;color:var(--grn);font-variant-numeric:tabular-nums">100%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">LABS H · N=47</div>
+      <div style="font-size:9px;color:var(--mu)">POS (N=24) folded into MXO</div>
+    </div>
+    <div style="background:var(--sf2);border-radius:8px;padding:.45rem .6rem;border:1px solid var(--bd)">
+      <div style="font-size:18px;font-weight:700;color:var(--co);font-variant-numeric:tabular-nums">87%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">Company · N=2,083</div>
+      <div style="font-size:9px;color:var(--mu)">All orgs +11–13 pts above baseline</div>
+    </div>
+  </div>
+  <div id="part-kpi-s" style="display:none;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:.5rem">
+    <div style="background:var(--gbg);border-radius:8px;padding:.45rem .6rem;border:1px solid #C3E6CB">
+      <div style="font-size:18px;font-weight:700;color:var(--grn);font-variant-numeric:tabular-nums">98%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">MXO S · N=48</div>
+      <div style="font-size:9px;color:var(--mu)">MXO Salary</div>
+    </div>
+    <div style="background:var(--gbg);border-radius:8px;padding:.45rem .6rem;border:1px solid #C3E6CB">
+      <div style="font-size:18px;font-weight:700;color:var(--grn);font-variant-numeric:tabular-nums">99%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">CXI S · N=67</div>
+      <div style="font-size:9px;color:var(--mu)">CXI Salary</div>
+    </div>
+    <div style="background:var(--gbg);border-radius:8px;padding:.45rem .6rem;border:1px solid #C3E6CB">
+      <div style="font-size:18px;font-weight:700;color:var(--grn);font-variant-numeric:tabular-nums">100%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">LABS S · N=5*</div>
+      <div style="font-size:9px;color:var(--mu)">Validate 1:1 · small N</div>
+    </div>
+    <div style="background:#FBF0DB;border-radius:8px;padding:.45rem .6rem;border:1px solid #E8D5A8">
+      <div style="font-size:18px;font-weight:700;color:var(--p);font-variant-numeric:tabular-nums">98%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">P · N=361</div>
+      <div style="font-size:9px;color:var(--mu)">Largest Salary org</div>
+    </div>
+    <div style="background:var(--sf2);border-radius:8px;padding:.45rem .6rem;border:1px solid var(--bd)">
+      <div style="font-size:18px;font-weight:700;color:var(--co);font-variant-numeric:tabular-nums">87%</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-top:1px">Company · N=2,083</div>
+      <div style="font-size:9px;color:var(--mu)">RI=98% · RS=100%</div>
+    </div>
+  </div>
+  <div style="font-size:9.5px;color:var(--mu);margin-top:.4rem;padding-top:.35rem;border-top:.5px solid var(--bd)">Each line = one org. Company (87%) is the baseline reference — dashed gray line. Data confirmed from screenshots + xlsx files. POS (N=24, 100%) is under MXO scope. P = Prabir Adarkar org (Salary-only, N=361), the largest Salary population in the folder.</div>
+</div>
+
+<!-- ═══ H VS S DIRECT SPLIT ═══ -->
+<div class="dv"></div>
+<div class="sec">Hourly vs Salary — direct split</div>
+<div style="font-size:9.5px;color:var(--mu);margin:-6px 0 .5rem">Company is one company-wide benchmark — the same value appears identically in both panels below (WES 8 · ITS 76% · Growth 57% · Mgr 80% · Belonging 78%). P is Salary-only (no Hourly equivalent) and appears only in the right-hand panel.</div>
+<div class="g2" style="margin-bottom:.7rem">
+  <div style="background:var(--sf);border-radius:10px;border:1px solid var(--bd);padding:.7rem .9rem">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:.5rem">
+      <span class="bh" style="font-size:10px;padding:2px 7px">Hourly</span>
+      <span style="font-size:10.5px;font-weight:600;color:var(--tx)">MXO · CXI · LABS</span>
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">WES</div><div class="cbar-wrap"><div class="cbar-fill" style="width:39%;background:var(--mxo)"><span class="cbar-val">39</span></div></div><div class="cbar-co"><strong>Company:</strong> 8</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:24%;background:var(--cxi)"><span class="cbar-val">24</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:30%;background:var(--labs)"><span class="cbar-val">30</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS</div>
+    <div class="split-insight">
+      <strong style="color:var(--mxo)">MXO 39 leads</strong> — far above the Company benchmark (8), the lowest WES figure across the whole comparison. Root cause: high leader-agent proximity, direct daily recognition, strong anchor leaders (MXO T5-b WES 61, MXO T7 41). The team perceives its work as effective day-to-day.
+      <strong style="color:var(--cxi)">CXI 24</strong> — still well above Company (8), but 5+ leaders with negative WES (worst: −50) pull the org average down relative to MXO. Structural cause: cross-border incentive asymmetry (CDMX has a performance bonus, US does not), creating a perceived disparity in accountability. 22.9% of Work Effectiveness comments are negative in CXI vs 15.9% in MXO.
+      <strong style="color:var(--labs)">LABS 30</strong> — new-LOB energy + direct recognition culture, but limited by structural project instability.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">ITS &gt;1yr</div><div class="cbar-wrap"><div class="cbar-fill" style="width:83%;background:var(--mxo)"><span class="cbar-val">83%</span></div></div><div class="cbar-co"><strong>Company:</strong> 76%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:90%;background:var(--cxi)"><span class="cbar-val">90%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:89%;background:var(--labs)"><span class="cbar-val">89%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS</div>
+    <div class="split-insight">
+      <strong style="color:var(--cxi)">CXI 90% leads</strong> — key paradox: lowest WES (24) but highest ITS. 89.8% of ITS comments confirm >1yr intent ("I feel part of the DoorDash family since day 1"). People stay despite structural friction because belonging and onboarding culture is strong.
+      <strong style="color:var(--mxo)">MXO 83% lowest</strong> despite having the highest WES — still +7 pts above Company (76%), but 16.1% of ITS comments signal &lt;1yr departure intent (vs 10.2% in CXI), concentrated in 2 leaders with WES −40 and −36. The attrition risk is localized, not widespread.
+      <strong style="color:var(--labs)">LABS 89%</strong> — close to CXI level, but fear over LOB permanence ("the project could end at any time") keeps it from going higher.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">Career Growth</div><div class="cbar-wrap"><div class="cbar-fill" style="width:58%;background:var(--mxo)"><span class="cbar-val">58%</span></div></div><div class="cbar-co"><strong>Company:</strong> 57%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:67%;background:var(--cxi)"><span class="cbar-val">67%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:72%;background:var(--labs)"><span class="cbar-val">72%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS</div>
+    <div class="split-insight">
+      <strong style="color:var(--labs)">LABS 72% leads</strong> — being a new LOB, "growing and changing fast" creates genuine perceived opportunity. The Acting Leader pathway is actively promoted in Slack.
+      <strong style="color:var(--mxo)">MXO and Company tie at 57–58%</strong> — the lowest dimension in the entire folder, at every level of the org. 23.7% of MXO's growth comments are unfavorable. Root cause: no published D2E criteria, 5 consecutive quarters with no movement, and shift-bid dissatisfaction amplifies the perception of stagnation.
+      <strong style="color:var(--cxi)">CXI 67%</strong> — visibility of internal postings and the Acting Leader process help, though low WES remains the underlying friction.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">Mgr Feedback</div><div class="cbar-wrap"><div class="cbar-fill" style="width:87%;background:var(--mxo)"><span class="cbar-val">87%</span></div></div><div class="cbar-co"><strong>Company:</strong> 80%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:85%;background:var(--cxi)"><span class="cbar-val">85%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:91%;background:var(--labs)"><span class="cbar-val">91%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS</div>
+    <div class="split-insight">
+      <strong style="color:var(--labs)">LABS 91% leads (best of all orgs)</strong> — +11 pts vs Company (80%). Small team (N=47), daily proximity, Bonusly culture of explicit recognition of wins.
+      <strong style="color:var(--mxo)">MXO 87%</strong> — strong leaders anchor the average (MXO T7 91%, MXO T5-b 91%), though the 2 at-risk leaders (WES −40/−36) pull it down.
+      <strong style="color:var(--cxi)">CXI 85% lowest of the 3</strong> — still above Company (80%), but 5+ leaders with negative WES drag the average down despite large leaders (CXI T6 ⭐ 88%) anchoring it. Manager feedback is present but does not offset the underlying structural friction.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">Belonging</div><div class="cbar-wrap"><div class="cbar-fill" style="width:74%;background:var(--mxo)"><span class="cbar-val">74%</span></div></div><div class="cbar-co"><strong>Company:</strong> 78%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:80%;background:var(--cxi)"><span class="cbar-val">80%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:68%;background:var(--labs)"><span class="cbar-val">68%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right">MXO · CXI · LABS</div>
+    <div class="split-insight" style="margin-bottom:0">
+      <strong style="color:var(--cxi)">CXI 80% leads</strong> — 77.2% of DEI comments are favorable, solid onboarding model ("I felt included from day 1 by my leaders and trainers").
+      <strong style="color:var(--labs)">LABS 68% lowest</strong> — the LOB is new, ambiguity over project permanence creates belonging uncertainty, regardless of how good the team culture is.
+      <strong style="color:var(--mxo)">MXO 74%</strong> — forum critique culture (spaces of exposure rather than collaboration) and concern over a transition toward a BPO-style model lower belonging despite the high WES.
+    </div>
+  </div>
+
+  <div style="background:var(--sf);border-radius:10px;border:1px solid var(--bd);padding:.7rem .9rem">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:.5rem">
+      <span class="bs" style="font-size:10px;padding:2px 7px">Salary</span>
+      <span style="font-size:10.5px;font-weight:600;color:var(--tx)">MXO · CXI · LABS · P · RI · RS</span>
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">WES</div><div class="cbar-wrap"><div class="cbar-fill" style="width:25%;background:var(--mxo)"><span class="cbar-val">25</span></div></div><div class="cbar-co"><strong>Company:</strong> 8</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:7%;background:var(--cxi)"><span class="cbar-val" style="font-size:9px">7</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:20%;background:var(--labs)"><span class="cbar-val">20</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:29%;background:var(--p)"><span class="cbar-val">29</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS · P</div>
+    <div class="split-insight">
+      <strong style="color:var(--p)">P 29 leads Salary</strong> — the largest Salary org (N=361) sits well above Company (8) and above every other org on this metric. Stable, well-resourced team with consistent manager structures; this is the de-facto Salary benchmark the other three orgs are falling short of.
+      <strong style="color:var(--cxi)">CXI 7 collapses — the most critical point in the whole folder</strong>. Drop of −26 pts vs Q126 (33→7) against P's own benchmark trajectory. Root cause confirmed in verbatims: partial THQ implementation + constant changes in AI usage directives ("sometimes we are told to use it, then not to, then to switch tools"). This generated acute frustration specifically at the manager (OM) layer. Even Company's WES (8) is itself the lowest figure on this chart — context for how low engagement runs company-wide on this metric.
+      <strong style="color:var(--mxo)">MXO 25</strong> — well above Company (8), trailing P (29) by only 4 pts. The forum critique culture that affects Hourly bleeds into the Salary layer too.
+      <strong style="color:var(--labs)">LABS 20 (N=5*)</strong> — cross-border incentive ambiguity (same pattern as CXI: CDMX bonus vs no US bonus) combined with the structural uncertainty of being a new LOB. Validate with 1:1s before acting at the population level given the very small N.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">ITS &gt;1yr</div><div class="cbar-wrap"><div class="cbar-fill" style="width:88%;background:var(--mxo)"><span class="cbar-val">88%</span></div></div><div class="cbar-co"><strong>Company:</strong> 76%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:88%;background:var(--cxi)"><span class="cbar-val">88%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:80%;background:var(--labs)"><span class="cbar-val">80%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:92%;background:var(--p)"><span class="cbar-val">92%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS · P</div>
+    <div class="split-insight">
+      <strong style="color:var(--p)">P 92% leads</strong> — the highest ITS figure in the entire Salary split, +16 pts vs Company (76%). At N=361, this is a statistically robust signal: the largest, most stable Salary org also retains people the longest.
+      <strong style="color:var(--mxo)">MXO 88% and CXI 88% tie</strong> — both well above Company (76%). This is the most visible ITS paradox in the document: CXI has WES=7 (the worst in the folder) yet retains people at nearly the same rate as P and MXO. People stay despite structural frustration — commitment is not broken, it is frustrated.
+      <strong style="color:var(--labs)">LABS 80% lowest</strong> (N=5, validate 1:1) — still above Company (76%), but fear over the new LOB's permanence reduces intent to stay even among those who are committed.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">Career Growth</div><div class="cbar-wrap"><div class="cbar-fill" style="width:63%;background:var(--mxo)"><span class="cbar-val">63%</span></div></div><div class="cbar-co"><strong>Company:</strong> 57%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:74%;background:var(--cxi)"><span class="cbar-val">74%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:40%;background:var(--labs)"><span class="cbar-val">40%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:67%;background:var(--p)"><span class="cbar-val">67%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS · P</div>
+    <div class="split-insight">
+      <strong style="color:var(--cxi)">CXI 74% leads Salary</strong> — despite the WES collapse, the D2E pathway and internal postings are visible to the OM layer, keeping growth aspiration high. This confirms low WES and high Growth can coexist when friction is operational (tools), not opportunity-based.
+      <strong style="color:var(--p)">P 67%</strong> — well above Company (57%) and roughly in line with the broader Salary cohort; consistent with a stable, structured org where growth paths exist but are not as visible as CXI's.
+      <strong style="color:var(--labs)">LABS 40% lowest in the entire folder</strong> — the only Salary org to sit below the Company figure (57%). Cross-border HR friction blocks formal growth paths. Explicit verbatim: "opportunities are only for customer-service-oriented profiles, not for professionals."
+      <strong style="color:var(--mxo)">MXO 63%</strong> — above Company (57%), but the same D2E criteria gap as in Hourly persists unresolved in the Salary layer.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">Mgr Feedback</div><div class="cbar-wrap"><div class="cbar-fill" style="width:81%;background:var(--mxo)"><span class="cbar-val">81%</span></div></div><div class="cbar-co"><strong>Company:</strong> 80%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:75%;background:var(--cxi)"><span class="cbar-val">75%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:80%;background:var(--labs)"><span class="cbar-val">80%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:84%;background:var(--p)"><span class="cbar-val">84%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS · P</div>
+    <div class="split-insight">
+      <strong style="color:var(--p)">P 84% leads</strong> — +4 pts vs Company (80%) and the highest of the four Salary orgs. Consistent manager structures and a large, stable population make this the most reliable Mgr Feedback read in the Salary split.
+      <strong style="color:var(--cxi)">CXI 75% lowest</strong> — −5 pts vs the company benchmark (80%), the only Salary org below the Company figure on this metric. Same collapse pattern as WES, hitting the OM layer directly: the manager relationship itself is under structural stress from the THQ rollout and shifting AI directives, not just the work itself.
+      <strong style="color:var(--mxo)">MXO 81%</strong> and <strong style="color:var(--labs)">LABS 80%</strong> sit at or slightly above the company figure — Mgr Feedback in Salary is comparatively stable outside of CXI's acute episode.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">Belonging</div><div class="cbar-wrap"><div class="cbar-fill" style="width:71%;background:var(--mxo)"><span class="cbar-val">71%</span></div></div><div class="cbar-co"><strong>Company:</strong> 78%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:76%;background:var(--cxi)"><span class="cbar-val">76%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:64%;background:var(--labs)"><span class="cbar-val">64%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:82%;background:var(--p)"><span class="cbar-val">82%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS · P</div>
+    <div class="split-insight" style="margin-bottom:0">
+      <strong style="color:var(--p)">P 82% leads — the only Salary org above the Company figure (78%)</strong> on this metric. This breaks the pattern seen across the other three Salary orgs, all of which sit below Company on Belonging; P's scale and stability appear to translate directly into a stronger sense of organizational connection.
+      <strong style="color:var(--cxi)">CXI 76% lowest of the other Salary orgs</strong> — just below Company (78%), echoing the same OM-layer strain seen in WES and Mgr Feedback: the THQ-driven friction bleeds into how connected Salary employees feel to the org, even though Hourly Belonging at CXI is the strongest in the whole folder (80%).
+      <strong style="color:var(--mxo)">MXO 71%</strong> — below Company (78%) and below its own Hourly figure (74%); the same forum critique culture and BPO-transition concern seen in Hourly persist into the Salary layer.
+      <strong style="color:var(--labs)">LABS 64% (N=5*)</strong> — the lowest Salary Belonging figure in the folder, consistent with the broader pattern of LABS Salary metrics running below Company on every people-experience dimension except AI Fluency; validate with 1:1s given the very small N.
+    </div>
+  </div>
+</div>
+
+<div class="g2" style="margin-bottom:.7rem">
+  <div style="background:var(--sf);border-radius:10px;border:1px solid var(--bd);padding:.7rem .9rem;grid-column:2/3">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:.5rem">
+      <span class="bs" style="font-size:10px;padding:2px 7px">Salary</span>
+      <span style="font-size:10.5px;font-weight:600;color:var(--tx)">AI metrics — MXO · CXI · LABS · P</span>
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">AI Daily</div><div class="cbar-wrap"><div class="cbar-fill" style="width:88%;background:var(--mxo)"><span class="cbar-val">88%</span></div></div><div class="cbar-co"><strong>P benchmark:</strong> 76%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:69%;background:var(--cxi)"><span class="cbar-val">69%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:60%;background:var(--labs)"><span class="cbar-val">60%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:76%;background:var(--p)"><span class="cbar-val">76%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right;margin-bottom:6px">MXO · CXI · LABS · P</div>
+    <div class="split-insight">
+      <strong style="color:var(--mxo)">MXO 88% leads adoption</strong> — best tool provisioning, no access friction reported in verbatims, well above P's own figure (76%), which is the reference benchmark for AI metrics since Company-level AI data was not part of the Q226 source.
+      <strong style="color:var(--p)">P 76%</strong> — this is the benchmark figure itself: the largest Salary org's daily usage rate, used as the reference point for the other three orgs given the absence of a company-wide AI metric.
+      <strong style="color:var(--cxi)">CXI 69%</strong> — 27-pt gap vs its own AI Fluency (96%, see below). The friction is access, not willingness: THQ failures explicitly named as the blocker.
+      <strong style="color:var(--labs)">LABS 60%</strong> — 40-pt gap vs its Fluency (100%). Fatigue from constant SOP changes in the new LOB slows daily adoption despite high capability.
+    </div>
+
+    <div class="cbar-row"><div class="cbar-label">AI Fluency</div><div class="cbar-wrap"><div class="cbar-fill" style="width:100%;background:var(--grn)"><span class="cbar-val">100%</span></div></div><div class="cbar-co"><strong>P benchmark:</strong> 96%</div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:96%;background:var(--cxi)"><span class="cbar-val">96%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:100%;background:var(--labs)"><span class="cbar-val">100%</span></div></div><div class="cbar-co"></div></div>
+    <div class="cbar-row"><div class="cbar-label"></div><div class="cbar-wrap"><div class="cbar-fill" style="width:96%;background:var(--p)"><span class="cbar-val">96%</span></div></div><div class="cbar-co"></div></div>
+    <div style="font-size:9px;color:var(--mu);text-align:right">MXO · CXI · LABS · P</div>
+    <div class="split-insight" style="margin-bottom:0">
+      <strong>Fluency is high and even across all orgs (96–100%)</strong> — the capability and willingness already exist across the entire Salary organization. The problem is never "they don't know how to use AI"; the problem is exclusively about access and tool stability (see the Daily vs Fluency gap above). MXO and LABS reach 100%, CXI and P both sit at 96% — a marginal difference that does not explain the daily adoption gaps. P's figure (96%) is used as the reference benchmark for this metric in the absence of a company-wide AI figure.
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMPARATIVE LINE CHART ═══ -->
+<div class="dv"></div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.45rem;flex-wrap:wrap;gap:8px">
+  <div class="sec" style="margin:0">Company vs MXO · CXI · LABS · P — comparative line chart</div>
+  <div style="display:flex;gap:4px">
+    <div id="btn-h" onclick="switchGenChart('h')" class="gw-toggle act">Hourly</div>
+    <div id="btn-s" onclick="switchGenChart('s')" class="gw-toggle">Salary</div>
+  </div>
+</div>
+<div id="leg-gen" class="leg"></div>
+<div class="ch" style="height:250px"><canvas id="c-gen"></canvas></div>
+
+<div id="gen-insights-h" style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.6rem">
+  <div class="gen-ins" style="border-top:2px solid var(--ora)">
+    <div class="gen-ins-lb" style="color:var(--ora)">ITS &gt;1yr — Hourly · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--cxi)">CXI 90% leads</strong> (+14 pts vs Company 76%) — 89.8% of ITS comments confirm >1yr. Strong onboarding culture + peer belonging. <strong style="color:var(--mxo)">MXO 84% lags vs CXI</strong> (still +8 pts vs Company) — 16.1% of ITS comments signal &lt;1yr departure, concentrated in 2 leaders (WES −40, −36). LABS 89% = CXI level, limited by LOB permanence uncertainty.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid var(--red)">
+    <div class="gen-ins-lb" style="color:var(--red)">Career Growth — Hourly · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--labs)">LABS 72% leads</strong> — New LOB generates growth perception ("growing and changing fast"). Acting Leader pathway visible in Slack. <strong style="color:var(--mxo)">MXO and Company tie at 57%</strong> — the lowest dimension in the entire folder. 23.7% of growth comments are unfavorable at MXO. No published D2E criteria, 5 quarters of stagnation. CXI 67% — internal posting visibility helps.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid var(--grn)">
+    <div class="gen-ins-lb" style="color:var(--grn)">Mgr Feedback — Hourly · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--labs)">LABS 91% leads</strong> (+11 pts vs Company 80%) — Small team (N=47), daily proximity, Bonusly culture, explicit recognition of wins. <strong style="color:var(--mxo)">MXO 87%</strong> — strong leaders (MXO T5-b 91%, MXO T7 91%) anchor; at-risk leaders pull it down. CXI 85% — 5+ leaders with negative WES drag despite strong positive leaders (CXI T6 ⭐ 88%). Company 80% = baseline.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid var(--mxo)">
+    <div class="gen-ins-lb" style="color:var(--mxo)">Belonging — Hourly · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--cxi)">CXI 80% leads</strong> — 77.2% favorable DEI comments, onboarding model works. "Part of the DoorDash family since day 1." <strong style="color:var(--labs)">LABS 68% lowest</strong> — Fear over LOB permanence ("the project could end at any time") + lead turnover. MXO 74% — forum critique culture + BPO concern suppress belonging. Company 78%.</div>
+  </div>
+</div>
+<div id="gen-insights-s" style="display:none;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.6rem">
+  <div class="gen-ins" style="border-top:2px solid var(--p)">
+    <div class="gen-ins-lb" style="color:var(--p)">WES — Salary · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--p)">P S=29 leads</strong> — the largest Salary org (N=361) sits well above Company (8) and above the other three orgs, acting as the de-facto Salary benchmark. <strong style="color:var(--cxi)">CXI S=7 lowest in folder</strong> — Steepest drop: −26 pts Q126→Q226 against P's own benchmark trajectory. THQ tool partial implementation + AI directive changes caused acute frustration in the OM layer. <strong style="color:var(--mxo)">MXO S=25</strong> — forum critique culture bleeds upward into Salary perception, trailing P by only 4 pts. <strong style="color:var(--labs)">LABS S=20</strong> (N=5): cross-border incentive ambiguity + new-LOB structural uncertainty. Company benchmark (this metric) = 8.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid var(--ora)">
+    <div class="gen-ins-lb" style="color:var(--ora)">ITS — Salary · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--p)">P S=92% leads</strong> — the highest ITS in the Salary split, +16 pts vs Company (76%); at N=361 this is a robust signal that the largest, most stable Salary org retains people longest. <strong style="color:var(--mxo)">MXO S=88% and CXI S=88% tie</strong> — both well above the Company benchmark (76%), nearly matching P. <strong style="color:var(--labs)">LABS S=80% lowest</strong> (N=5, validate 1:1) — new LOB permanence fear drives lower intent, though still above Company. ITS paradox: people stay despite structural frustrations.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid var(--red)">
+    <div class="gen-ins-lb" style="color:var(--red)">Career Growth — Salary · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--cxi)">CXI S=74% leads Salary</strong> — D2E pathway and internal postings visible to the OM layer; growth aspiration high despite low WES. <strong style="color:var(--p)">P S=67%</strong> — above Company (57%) and broadly in line with the cohort; a stable org where growth paths exist but are less visible than CXI's. <strong style="color:var(--labs)">LABS S lowest in folder</strong> — the only Salary org below the Company figure (57%); cross-border HR friction blocks formal paths; growth "only for customer service oriented" verbatim. MXO S=63% — same D2E gap as Hourly, unresolved, but still above Company.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid var(--mxo)">
+    <div class="gen-ins-lb" style="color:var(--mxo)">Belonging — Salary · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--p)">P S=82% leads</strong> — the only Salary org above the Company figure (78%) on this metric, breaking the pattern seen in MXO/CXI/LABS, all of which sit below Company on Belonging. Scale and stability appear to translate into stronger organizational connection. <strong style="color:var(--labs)">LABS S=64% lowest</strong> (N=5, validate 1:1) — consistent with LABS Salary trailing on most people-experience dimensions. CXI S=76% closest to Company among the other three, but still trails its own strong Hourly Belonging (80%) — the THQ-driven OM strain reaches belonging too. MXO S=71% reflects the same forum critique culture seen in Hourly.</div>
+  </div>
+  <div class="gen-ins" style="border-top:2px solid #5B38B5">
+    <div class="gen-ins-lb" style="color:#5B38B5">AI Daily vs Fluency — Salary · Why the gap?</div>
+    <div class="gen-ins-tx"><strong style="color:var(--mxo)">MXO S=88% Daily, 100% Fluency</strong> — Best adoption, provisioning working, above P's own benchmark figure (76% Daily). <strong style="color:var(--p)">P S=76% Daily, 96% Fluency</strong> — the reference benchmark itself, used in place of a company-wide AI figure. <strong style="color:var(--cxi)">CXI S 27pt gap</strong> (Daily vs Fluency) — THQ failures named explicitly, access friction not unwillingness. LABS S 40pt gap — SOP change fatigue slows adoption despite high capability.</div>
+  </div>
+</div>
+
+<!-- ═══ WHAT'S GOING WELL ═══ -->
+<div class="dv"></div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.45rem;flex-wrap:wrap;gap:8px">
+  <div class="sec" style="margin:0">What's going well and what's not — per org per question</div>
+  <div style="display:flex;gap:4px">
+    <div id="gwbtn-h" onclick="switchGWTable('h')" class="gw-toggle act">Hourly</div>
+    <div id="gwbtn-s" onclick="switchGWTable('s')" class="gw-toggle">Salary</div>
+  </div>
+</div>
+<div id="gw-table-h" class="tw">
+  <table>
+    <colgroup><col style="width:20%"><col style="width:10%"><col style="width:13%"><col style="width:13%"><col style="width:13%"><col style="width:31%"></colgroup>
+    <tr><th>Dimension</th><th class="nr">Company</th><th class="nr" style="color:var(--mxo)">MXO H</th><th class="nr" style="color:var(--cxi)">CXI H</th><th class="nr" style="color:var(--labs)">LABS H</th><th>Who leads / who lags &amp; why</th></tr>
+    <tr><td>WES</td><td class="nr">8</td><td class="nr" style="color:var(--grn);font-weight:700">39 ✅</td><td class="nr">24</td><td class="nr">30</td><td style="font-size:10.5px"><strong style="color:var(--mxo)">MXO leads</strong> — All three orgs sit far above the company-wide WES of 8. High mgr recognition, stable team structure, direct metric visibility per leader. CXI lags MXO/LABS: structural org-change narrative (39.8% of integration comments = change/ambiguity). LABS strong: new LOB energy, direct recognition culture.</td></tr>
+    <tr style="background:var(--sf2)"><td>ITS &gt;1yr</td><td class="nr">76%</td><td class="nr" style="color:var(--ora)">83% ⚠</td><td class="nr" style="color:var(--grn);font-weight:700">90% ✅</td><td class="nr">89%</td><td style="font-size:10.5px"><strong style="color:var(--cxi)">CXI leads</strong> — 89.8% of CXI ITS comments confirm >1yr. <strong style="color:var(--mxo)">MXO lags the other orgs</strong> (still above Company) — 16.1% of MXO ITS comments are &lt;1yr (vs 10.2% CXI). Root cause: two leaders with WES −40/−36 driving local flight risk in their sub-teams.</td></tr>
+    <tr><td>Career Growth</td><td class="nr">57%</td><td class="nr" style="color:var(--red);font-weight:700">58% 🔴</td><td class="nr">67%</td><td class="nr" style="color:var(--grn)">72% ✅</td><td style="font-size:10.5px"><strong style="color:var(--labs)">LABS leads</strong> — New LOB creates perceived growth opportunities ("growing and changing fast"). <strong style="color:var(--mxo)">MXO and Company tie at the lowest point in the folder</strong> — 23.7% of MXO growth comments unfavorable. No formal career ladder, D2E criteria not published, 5-quarter stagnation.</td></tr>
+    <tr style="background:var(--sf2)"><td>Mgr Feedback</td><td class="nr">80%</td><td class="nr" style="color:var(--grn)">87% ✅</td><td class="nr">85%</td><td class="nr" style="color:var(--grn);font-weight:700">91% ✅</td><td style="font-size:10.5px"><strong style="color:var(--labs)">LABS leads</strong> — Small team, leader-agent proximity, direct daily recognition. MXO strong: Mgr Feedback consistent across leaders (MXO T7 91%, MXO T5-b 91%). CXI trails slightly: at-risk leaders score lower but large leaders anchor the average. All three sit above the Company baseline of 80%.</td></tr>
+    <tr><td>Belonging</td><td class="nr">78%</td><td class="nr">74%</td><td class="nr" style="color:var(--grn);font-weight:700">80% ✅</td><td class="nr" style="color:var(--ora)">68% ⚠</td><td style="font-size:10.5px"><strong style="color:var(--cxi)">CXI leads</strong> — 77.2% favorable DEI comments, strong onboarding culture ("felt included since day 1"). <strong style="color:var(--labs)">LABS lags</strong> — 68%: LOB is new (ambiguity about project permanence creates belonging uncertainty). MXO 74%: BPO transition concern and forum critique culture lower belonging.</td></tr>
+  </table>
+</div>
+<div id="gw-table-s" class="tw" style="display:none">
+  <table>
+    <colgroup><col style="width:18%"><col style="width:9%"><col style="width:11%"><col style="width:11%"><col style="width:11%"><col style="width:11%"><col style="width:29%"></colgroup>
+    <tr><th>Dimension</th><th class="nr">Company</th><th class="nr" style="color:var(--mxo)">MXO S</th><th class="nr" style="color:var(--cxi)">CXI S</th><th class="nr" style="color:var(--labs)">LABS S*</th><th class="nr" style="color:var(--p)">P</th><th>Who leads / who lags &amp; why</th></tr>
+    <tr><td>WES</td><td class="nr">8</td><td class="nr">25</td><td class="nr" style="color:var(--red);font-weight:700">7 🔴</td><td class="nr">20</td><td class="nr" style="color:var(--grn);font-weight:700">29 ✅</td><td style="font-size:10.5px"><strong style="color:var(--p)">P leads</strong> — largest Salary population (N=361), the de-facto benchmark for this metric. <strong style="color:var(--cxi)">CXI collapses</strong> — −26 pts vs Q126 (33→7), the most critical point in the folder. THQ tool partial implementation + AI directive changes caused acute frustration at the OM layer. MXO 25 and LABS 20 (N=5*) sit well above Company despite their own internal pressures.</td></tr>
+    <tr style="background:var(--sf2)"><td>ITS &gt;1yr</td><td class="nr">76%</td><td class="nr">88%</td><td class="nr">88%</td><td class="nr" style="color:var(--ora)">80% ⚠</td><td class="nr" style="color:var(--grn);font-weight:700">92% ✅</td><td style="font-size:10.5px"><strong style="color:var(--p)">P leads</strong> — highest ITS in the Salary split, N=361 makes this a robust signal. <strong style="color:var(--mxo)">MXO S=88% and CXI S=88% tie</strong> — both well above Company (76%). <strong style="color:var(--labs)">LABS S=80% lowest</strong> (N=5, validate 1:1) — new LOB permanence fear drives lower intent.</td></tr>
+    <tr><td>Career Growth</td><td class="nr">57%</td><td class="nr">63%</td><td class="nr" style="color:var(--grn);font-weight:700">74% ✅</td><td class="nr" style="color:var(--red)">40% 🔴</td><td class="nr">67%</td><td style="font-size:10.5px"><strong style="color:var(--cxi)">CXI S leads Salary</strong> — D2E pathway and internal postings visible to the OM layer; growth aspiration high despite low WES. P (67%) sits close behind, above Company. <strong style="color:var(--labs)">LABS S lowest in folder</strong> — the only Salary org below the Company figure (57%); cross-border HR friction blocks formal paths.</td></tr>
+    <tr style="background:var(--sf2)"><td>Mgr Feedback</td><td class="nr">80%</td><td class="nr">81%</td><td class="nr" style="color:var(--ora)">75% ⚠</td><td class="nr">80%</td><td class="nr" style="color:var(--grn);font-weight:700">84% ✅</td><td style="font-size:10.5px"><strong style="color:var(--p)">P leads</strong> — +4 pts vs Company (80%), the highest of the four Salary orgs; large stable population. <strong style="color:var(--cxi)">CXI S lowest</strong> — −5 pts vs the company benchmark, the only org below Company here. Same collapse pattern as WES at the OM layer.</td></tr>
+    <tr><td>Belonging</td><td class="nr">78%</td><td class="nr" style="color:var(--ora)">71% ⚠</td><td class="nr">76%</td><td class="nr" style="color:var(--red)">64% 🔴</td><td class="nr" style="color:var(--grn);font-weight:700">82% ✅</td><td style="font-size:10.5px"><strong style="color:var(--p)">P leads — the only Salary org above Company</strong> (78%) on this metric, breaking the pattern seen in the other three orgs. <strong style="color:var(--labs)">LABS S=64% lowest</strong> (N=5, validate 1:1). CXI S=76% closest to Company among the others, but still trails its own strong Hourly figure (80%).</td></tr>
+    <tr style="background:var(--sf2)"><td>AI Daily / Fluency**</td><td class="nr">— / —</td><td class="nr" style="color:var(--grn);font-weight:700">88% / 100% ✅</td><td class="nr">69% / 96%</td><td class="nr">60% / 100%</td><td class="nr">76% / 96%</td><td style="font-size:10.5px"><strong style="color:var(--mxo)">MXO S leads adoption</strong> — Best provisioning, no access friction, above P's own benchmark figure. <strong style="color:var(--cxi)">CXI S 27pt gap</strong> (Daily vs Fluency) — THQ failures named explicitly. **AI metrics tracked against P's own figures as the reference benchmark, since a company-wide AI figure was not part of the Q226 source data.</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ═══ VERBATIM SUMMARY — VISUALLY SEPARATE CARD ═══ -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="vb-section">
+  <div style="font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--tx);margin-bottom:.7rem;display:flex;align-items:center;gap:8px">
+    <span style="background:#1a1917;color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:10px">Verbatim Summary</span>
+    <span>Comment analysis — what the raw text says</span>
+  </div>
+
+  <div style="background:var(--sf);border-radius:10px;padding:.65rem .9rem;margin-bottom:.7rem;border-left:3px solid #1a1917">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:.25rem">Methodology note</div>
+    <p style="font-size:11.5px;color:var(--t2);line-height:1.55"><strong style="color:var(--tx)">MXO H: 2,210 comments</strong> (MXO Comments H.xlsx, row-counted). <strong style="color:var(--tx)">CXI H: 4,174 comments</strong> (CXI Comments H.xlsx, row-counted). <strong style="color:var(--tx)">LABS H: ~222 comments</strong> (LABS Comments H.xlsx, estimated). <strong style="color:var(--p)">P (Prabir Adarkar) Comments S: row-counted from Prabir Adarkar Comments S.xlsx</strong>, the largest Salary comment file in the folder. LABS S / MXO S / CXI S: estimated from file-size ratio. All percentages are raw row counts per topic/category column. No interpretation — only what the files contain.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:.75rem">
+    <div style="background:var(--sf);border-radius:10px;padding:.6rem .8rem;border:1.5px solid var(--mxo)">
+      <div style="font-size:10px;font-weight:700;color:var(--mxo);margin-bottom:4px">MXO H — 2,210 total</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6">
+        Work Effectiveness: <strong>819 (37.1%)</strong><br>
+        Integration: <strong>388 (17.6%)</strong><br>
+        Intent-to-Stay: <strong>298 (13.5%)</strong><br>
+        Growth: <strong>253 (11.4%)</strong><br>
+        Mgr Effectiveness: <strong>221 (10.0%)</strong><br>
+        DEI / Belonging: <strong>168 (7.6%)</strong>
+      </div>
+    </div>
+    <div style="background:var(--sf);border-radius:10px;padding:.6rem .8rem;border:1.5px solid var(--cxi)">
+      <div style="font-size:10px;font-weight:700;color:var(--cxi);margin-bottom:4px">CXI H — 4,174 total</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6">
+        Work Effectiveness: <strong>1,541 (36.9%)</strong><br>
+        Integration: <strong>706 (16.9%)</strong><br>
+        Intent-to-Stay: <strong>609 (14.6%)</strong><br>
+        Growth: <strong>453 (10.9%)</strong><br>
+        Mgr Effectiveness: <strong>395 (9.5%)</strong><br>
+        DEI / Belonging: <strong>333 (8.0%)</strong>
+      </div>
+    </div>
+    <div style="background:var(--sf);border-radius:10px;padding:.6rem .8rem;border:1.5px solid var(--labs)">
+      <div style="font-size:10px;font-weight:700;color:var(--labs);margin-bottom:4px">LABS H — ~222 est.</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6">
+        DEI / Belonging: <strong>12 (5.4%)</strong><br>
+        Growth: <strong>11 (5.0%)</strong><br>
+        Integration: <strong>10 (4.5%)</strong><br>
+        Intent-to-Stay: <strong>4 (1.8%)</strong><br>
+        <span style="color:var(--mu);font-size:10px">LABS H is ~222 rows total from snippet count</span>
+      </div>
+    </div>
+    <div style="background:#FBF0DB;border-radius:10px;padding:.6rem .8rem;border:1.5px solid var(--p)">
+      <div style="font-size:10px;font-weight:700;color:var(--p);margin-bottom:4px">P (Prabir) S — N=361</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6">
+        AI Fluency: <strong>Limited / Moderate</strong><br>
+        Top theme: <strong>THQ partial rollout</strong><br>
+        Verbatim: <strong>tool-switching fatigue</strong><br>
+        <span style="color:var(--mu);font-size:10px">Largest Salary comment file (Prabir Adarkar Comments S.xlsx); see dedicated card below</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">Sentiment within each topic — MXO vs CXI vs LABS</div>
+
+  <div class="tw" style="margin-bottom:.55rem">
+    <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px">
+      <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Work Effectiveness</span>
+      <span style="font-size:10px;color:var(--mu)">MXO: 882 · CXI: 1,678 · LABS: key verbatims below</span>
+    </div>
+    <table><colgroup><col style="width:18%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:26%"></colgroup>
+      <tr><th>Sentiment</th><th class="nr" style="color:var(--mxo)">MXO H #</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI H #</th><th class="nr" style="color:var(--cxi)">CXI %</th><th>What the data says</th></tr>
+      <tr><td>Easier ✅</td><td class="nr" style="color:var(--mxo)">557</td><td class="nr" style="color:var(--grn);font-weight:700">63.2%</td><td class="nr" style="color:var(--cxi)">922</td><td class="nr" style="color:var(--ora)">54.9%</td><td style="font-size:10.5px">MXO +8.3pts more positive. LABS: AI tools (Claude Code) making work easier in new LOB context.</td></tr>
+      <tr style="background:var(--sf2)"><td>No change</td><td class="nr">122</td><td class="nr">13.8%</td><td class="nr">235</td><td class="nr">14.0%</td><td style="font-size:10.5px">Equal — neutral voice consistent across both orgs.</td></tr>
+      <tr><td>Harder ❌</td><td class="nr">140</td><td class="nr" style="color:var(--ora)">15.9%</td><td class="nr">384</td><td class="nr" style="color:var(--red);font-weight:700">22.9%</td><td style="font-size:10.5px">CXI +7pts more negative. THQ tool failures + directive changes drive CXI's harder perception.</td></tr>
+    </table>
+  </div>
+
+  <div class="tw" style="margin-bottom:.55rem">
+    <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px">
+      <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Growth Opportunities</span>
+      <span style="font-size:10px;color:var(--mu)">MXO: 253 · CXI: 453 · LABS H: 11 visible comments</span>
+    </div>
+    <table><colgroup><col style="width:18%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:26%"></colgroup>
+      <tr><th>Sentiment</th><th class="nr" style="color:var(--mxo)">MXO H #</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI H #</th><th class="nr" style="color:var(--cxi)">CXI %</th><th>What the data says</th></tr>
+      <tr><td>Favorable ✅</td><td class="nr">132</td><td class="nr" style="color:var(--ora)">52.2%</td><td class="nr">296</td><td class="nr" style="color:var(--grn);font-weight:700">65.3%</td><td style="font-size:10.5px">CXI +13.1pts more positive on growth. LABS: split — new LOB opportunity perception vs "unclear path to better positions."</td></tr>
+      <tr style="background:var(--sf2)"><td>Neutral</td><td class="nr">61</td><td class="nr">24.1%</td><td class="nr">94</td><td class="nr">20.8%</td><td style="font-size:10.5px">Similar. LABS also has neutral comments ("not currently looking for growth").</td></tr>
+      <tr><td>Unfavorable ❌</td><td class="nr">60</td><td class="nr" style="color:var(--red);font-weight:700">23.7%</td><td class="nr">63</td><td class="nr" style="color:var(--ora)">13.9%</td><td style="font-size:10.5px"><strong>MXO +9.8pts more negative.</strong> "I know about D2E but don't understand what's taken into consideration." No formal criteria published.</td></tr>
+    </table>
+  </div>
+
+  <div class="tw" style="margin-bottom:.55rem">
+    <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px">
+      <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Integration (cross-border, org change, ambiguity)</span>
+      <span style="font-size:10px;color:var(--mu)">MXO: 388 · CXI: 706 · LABS: explicitly shares MX-US comments</span>
+    </div>
+    <table><colgroup><col style="width:22%"><col style="width:13%"><col style="width:13%"><col style="width:13%"><col style="width:13%"><col style="width:26%"></colgroup>
+      <tr><th>Sub-category</th><th class="nr" style="color:var(--mxo)">MXO H #</th><th class="nr" style="color:var(--mxo)">%</th><th class="nr" style="color:var(--cxi)">CXI H #</th><th class="nr" style="color:var(--cxi)">%</th><th>What the data says</th></tr>
+      <tr><td>Org change / understanding</td><td class="nr">121</td><td class="nr">31.2%</td><td class="nr">281</td><td class="nr" style="color:var(--red)">39.8%</td><td style="font-size:10.5px"><strong>CXI +8.6pts.</strong> THQ, tool switches, and directive changes dominate CXI org-change narrative.</td></tr>
+      <tr style="background:var(--sf2)"><td>Collaboration</td><td class="nr">87</td><td class="nr" style="color:var(--grn)">22.4%</td><td class="nr">122</td><td class="nr">17.3%</td><td style="font-size:10.5px">MXO +5.1pts more collaboration comments — more team-oriented narrative.</td></tr>
+      <tr><td>Ambiguity</td><td class="nr">62</td><td class="nr" style="color:var(--ora)">16.0%</td><td class="nr">83</td><td class="nr">11.8%</td><td style="font-size:10.5px">MXO H has more ambiguity by %, but LABS has the most explicit ambiguity verbatims ("project could end", "lead left").</td></tr>
+    </table>
+    <div style="padding:6px 8px;background:var(--rbg);font-size:10.5px;color:var(--rtx)"><strong>LABS + CXI shared pattern:</strong> "US team sees MX team as inferior" / "subordinate dynamic" — appears verbatim in both LABS Comments H and CXI Comments H. Confirms cross-org structural root cause, not individual management issue.</div>
+  </div>
+
+  <div class="g2">
+    <div class="tw">
+      <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd)"><span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Intent-to-Stay</span></div>
+      <table><colgroup><col style="width:30%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:19%"></colgroup>
+        <tr><th>Category</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI %</th><th class="nr" style="color:var(--labs)">LABS</th><th>Key gap</th></tr>
+        <tr><td>ITS &gt;1yr ✅</td><td class="nr" style="color:var(--ora)">83.9%</td><td class="nr" style="color:var(--grn);font-weight:700">89.8%</td><td class="nr">100%*</td><td style="font-size:10px">MXO lags CXI by 5.9pts. LABS S ITS=80% — warning signal.</td></tr>
+        <tr class="tr-b"><td>ITS &lt;1yr ❌</td><td class="nr" style="color:var(--red);font-weight:700">16.1%</td><td class="nr" style="color:var(--ora)">10.2%</td><td class="nr">0%*</td><td style="font-size:10px">MXO +5.9pts flight risk in comments. Concentrated in at-risk leader sub-teams.</td></tr>
+      </table>
+      <div style="padding:5px 8px;font-size:10px;color:var(--mu)">*LABS H ITS comment N=4 — too small for % calculation</div>
+    </div>
+    <div class="tw">
+      <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd)"><span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">DEI / Belonging</span></div>
+      <table><colgroup><col style="width:30%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:19%"></colgroup>
+        <tr><th>Category</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI %</th><th class="nr" style="color:var(--labs)">LABS</th><th>Key gap</th></tr>
+        <tr><td>Favorable ✅</td><td class="nr" style="color:var(--ora)">66.7%</td><td class="nr" style="color:var(--grn);font-weight:700">77.2%</td><td class="nr">~75%</td><td style="font-size:10px">CXI +10.5pts more positive DEI comments. Consistent with score gap (74% vs 80%).</td></tr>
+        <tr class="tr-b"><td>Unfavorable ❌</td><td class="nr" style="color:var(--red);font-weight:700">15.5%</td><td class="nr" style="color:var(--ora)">9.0%</td><td class="nr">~17%</td><td style="font-size:10px">MXO +6.5pts, LABS slightly higher — both driven by recognition gaps and instability.</td></tr>
+      </table>
+      <div style="padding:5px 8px;background:var(--gbg);font-size:10px;color:var(--gtx)"><strong>CXI leads belonging</strong> despite lower WES — onboarding culture and peer belonging are structurally separate from work effectiveness concerns.</div>
+    </div>
+  </div>
+
+  <!-- ═══ P (PRABIR) DEDICATED VERBATIM CARD ═══ -->
+  <div class="dv" style="margin:.9rem 0 .7rem"></div>
+  <div class="sec" style="color:var(--p)">P (Prabir Adarkar) — Salary verbatim, separate from MXO/CXI/LABS</div>
+  <div style="font-size:9.5px;color:var(--mu);margin:-6px 0 .55rem">P is a Salary-only org (N=361) with its own comment file (Prabir Adarkar Comments S.xlsx) — the largest Salary verbatim source in the folder. Kept separate here because it does not map onto the MXO/CXI/LABS Hourly-paired structure.</div>
+  <div class="tw" style="margin-bottom:.55rem;border:1.5px solid var(--p)">
+    <div style="background:#FBF0DB;padding:6px 9px;border-bottom:1px solid #E8D5A8;display:flex;align-items:center;gap:8px">
+      <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--p)">AI Fluency — Limited vs Moderate</span>
+      <span style="font-size:10px;color:var(--mu)">Direct read from Prabir Adarkar Comments S.xlsx, ai fluency topic column</span>
+    </div>
+    <table><colgroup><col style="width:22%"><col style="width:78%"></colgroup>
+      <tr><th>Category</th><th>What the verbatims say</th></tr>
+      <tr><td style="font-size:10.5px;color:var(--red);font-weight:700">Limited</td><td style="font-size:10.5px">Recurring theme is tool-switching fatigue from constantly changing AI directives: <em>"every week someone is using a new AI different from the one used the previous week... this frequent change in AI tools poses a mind blocker for me as I cannot move at that very fast pace."</em> Other comments express distrust in AI accuracy for grading/QA tasks and a preference to "do things myself." This matches the THQ-driven friction pattern also seen in CXI's WES collapse — directive instability, not capability gaps, is the blocker.</td></tr>
+      <tr style="background:var(--sf2)"><td style="font-size:10.5px;color:var(--grn);font-weight:700">Moderate</td><td style="font-size:10.5px">Several comments describe AI as already integrated into daily workflows — drafting shift-bid documentation, improving wording in OM/peer/agent communication, structuring emails. One verbatim explicitly calls out an organizational gap: <em>"My org and the company have AI initiatives teams, but neither has been proactive in reaching out to the business to bridge the gap between strategy and daily execution."</em> This is consistent with P's high AI Fluency (96%) sitting well above its own Daily usage (76%) — the capability is there, but adoption depends on top-down clarity that hasn't fully arrived.</td></tr>
+    </table>
+    <div style="padding:6px 9px;background:#FBF0DB;font-size:10.5px;color:var(--otx)"><strong>Cross-reference with the WES split above:</strong> P's verbatims independently surface the same THQ/AI-directive-instability theme that drives CXI's Salary WES collapse to 7 — but because P's own engagement metrics remain strong (WES 29, Belonging 82%), the friction here reads as an operational annoyance rather than a structural crisis. This is the clearest evidence in the folder that THQ/AI-directive instability is a company-wide irritant whose severity depends on how much it compounds with other structural stressors (cross-border incentive asymmetry, new-LOB uncertainty) — present in CXI and LABS, largely absent in P.</div>
+  </div>
+
+  <div style="font-size:10px;color:var(--mu);text-align:center;margin-top:.75rem">Verbatim Summary · Source files: MXO Comments H (2,210 rows) · CXI Comments H (4,174 rows) · LABS Comments H (~222 rows) · Prabir Adarkar Comments S (largest Salary file) · All H files row-counted · S files estimated except P · Jun 29, 2026</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ═══ FOCAL POINTS ═══ -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="dv" style="margin:1.2rem 0 .8rem;border-top-width:2px"></div>
+<div class="sec">Focal Points — what needs attention right now</div>
+<div style="font-size:10.5px;color:var(--mu);margin:-6px 0 .6rem">Not organized by metric category — ranked by urgency and business impact. Mix of critical risks and notable strengths worth replicating.</div>
+<div style="display:flex;flex-direction:column;gap:7px;margin-bottom:.7rem">
+
+  <div class="fp-card" style="background:var(--rbg);border:1px solid #F0B8B0">
+    <div class="fp-tag" style="background:var(--red)">🔴 Critical</div>
+    <div>
+      <div class="fp-title" style="color:var(--rtx)">CXI Salary WES collapsed to 7 — steepest single-quarter drop in the entire dataset</div>
+      <div class="fp-tx">−26 pts vs Q126 (33→7), measured against P's own benchmark trajectory (the largest, most stable Salary org). This is an acute, time-boxed event — not a slow trend — which means it is fixable fast if addressed now. Root cause confirmed in verbatims: partial THQ implementation + constantly shifting AI tool directives ("sometimes we're told to use it, then not to, then to switch tools"). P's own Salary comments independently surface the same THQ/AI-directive theme, confirming this is a company-wide irritant that becomes critical specifically where it compounds with other stressors. Sits specifically at the OM management layer (CXI S Mgr Feedback also down to 75%, −5 pts vs the company benchmark of 80%; CXI S Belonging also dips to 76%). <strong>Action this cycle:</strong> stabilize the THQ rollout and freeze AI tool-switching directives for one quarter; this single fix likely resolves WES, Mgr Feedback, and Belonging simultaneously.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--rbg);border:1px solid #F0B8B0">
+    <div class="fp-tag" style="background:var(--red)">🔴 Critical</div>
+    <div>
+      <div class="fp-title" style="color:var(--rtx)">LABS Salary Career Growth at 40% — lowest score anywhere in the folder, and the only org below the Company figure</div>
+      <div class="fp-tx">−17 pts vs the company benchmark (57%) — LABS S is the only Salary org to fall below the company-wide Career Growth figure (P sits comfortably above at 67%). Verbatim is explicit and damaging: <em>"opportunities are only for customer-service-oriented profiles, not for professionals."</em> This is a small population (N=5) but the signal is structural, not anecdotal — cross-border HR friction is blocking formal growth paths for an entire job family. LABS Salary Belonging (64%) is also the lowest in the folder, suggesting the same structural uncertainty is affecting multiple dimensions at once. If left unaddressed, this becomes a retention risk the moment the LOB scales. <strong>Action:</strong> validate with 1:1s this cycle, then formalize a growth path for non-customer-service roles before LABS headcount grows further.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--obg);border:1px solid #F2C9A0">
+    <div class="fp-tag" style="background:var(--ora)">🟠 High</div>
+    <div>
+      <div class="fp-title" style="color:var(--otx)">Career Growth is the universal floor — Company itself sits at 57%, the lowest dimension across the entire dataset</div>
+      <div class="fp-tx">Career Growth is the lowest figure for Company across every metric tracked (57%), and MXO H ties it almost exactly at 58% — flat for 5+ consecutive quarters with no formal career ladder or published D2E criteria. This is not an MXO-only problem; it's the structural ceiling at every level of the org, with 23.7% of MXO's growth comments unfavorable. Even P, the strongest Salary org overall, only reaches 67% here — well short of CXI's 74%. <strong>Action:</strong> publish D2E criteria company-wide this quarter — MXO is the most urgent case but the fix needs to happen at the company level to actually move the floor.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--obg);border:1px solid #F2C9A0">
+    <div class="fp-tag" style="background:var(--ora)">🟠 High</div>
+    <div>
+      <div class="fp-title" style="color:var(--otx)">5+ CXI Hourly leaders with negative WES (worst: −50) — this is a structural pattern, not isolated underperformance</div>
+      <div class="fp-tx">Root cause is cross-border incentive asymmetry: CDMX teams have a performance bonus, US teams do not, creating a perceived disparity in accountability and urgency that shows up across multiple, unrelated leaders simultaneously. 22.9% of CXI's Work Effectiveness comments are negative (vs 15.9% at MXO). Because this is structural rather than leader-specific, replacing or coaching individual leaders will not fix it. <strong>Action:</strong> resolve the incentive asymmetry at the policy level, not the leader level.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--obg);border:1px solid #F2C9A0">
+    <div class="fp-tag" style="background:var(--ora)">🟠 High</div>
+    <div>
+      <div class="fp-title" style="color:var(--otx)">MXO Hourly has the highest WES (39) yet the lowest ITS (83%) — flight risk is masked by the org average</div>
+      <div class="fp-tx">16.1% of MXO ITS comments signal &lt;1yr departure intent (vs 10.2% at CXI), but this risk is concentrated almost entirely in 2 leaders' sub-teams (WES −40 and −36, ~26 people combined). The org-level WES of 39 hides this — a company-wide read of MXO would miss the problem entirely. <strong>Action:</strong> 1:1 retention conversations with both sub-teams this cycle; this is small enough in headcount to fix surgically before it spreads.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--gbg);border:1px solid #A8D9BC">
+    <div class="fp-tag" style="background:var(--grn)">🟢 Strength</div>
+    <div>
+      <div class="fp-title" style="color:var(--gtx)">P (Prabir Adarkar) is the strongest and most stable Salary org in the folder — its scale and consistency make it the natural internal benchmark</div>
+      <div class="fp-tx">At N=361 — by far the largest Salary population — P leads or near-leads on WES (29), ITS (92%), Mgr Feedback (84%), and is the only Salary org above the Company figure on Belonging (82%). This isn't a small-N artifact; it's a genuinely large, stable, well-managed population performing consistently well across every dimension. Its own verbatims surface the same THQ/AI-directive friction seen elsewhere in the folder, but because the underlying engagement foundation is strong, that friction reads as an irritant rather than a crisis — a useful contrast case for understanding why the same operational issue becomes critical in CXI but not here. <strong>Action:</strong> use P's management practices and team structure as a reference model when designing interventions for CXI and LABS; document what's different about P's environment that makes it resilient to the same THQ/AI pressures affecting other orgs.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--gbg);border:1px solid #A8D9BC">
+    <div class="fp-tag" style="background:var(--grn)">🟢 Strength</div>
+    <div>
+      <div class="fp-title" style="color:var(--gtx)">CXI retains people at MXO's rate (88% Salary ITS) despite having the worst WES in the entire folder (7) — this resilience is worth protecting and studying</div>
+      <div class="fp-tx">This is the clearest evidence that CXI's belonging and onboarding culture (80% Hourly Belonging, the best in the folder; 77.2% favorable DEI comments) is functioning as a genuine retention buffer, independent of operational frustration. Commitment is not broken, it's frustrated — and that distinction matters for how leadership should respond. <strong>Action:</strong> protect and document what's driving this belonging culture before fixing the WES/THQ issue — don't let an operational fix inadvertently disrupt the onboarding practices that are currently preventing attrition.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--gbg);border:1px solid #A8D9BC">
+    <div class="fp-tag" style="background:var(--grn)">🟢 Strength</div>
+    <div>
+      <div class="fp-title" style="color:var(--gtx)">LABS has the best Mgr Feedback of any org (91% Hourly) — a direct, replicable model worth exporting now</div>
+      <div class="fp-tx">Small team (N=47), high daily proximity, and a Bonusly-driven culture of explicit recognition are producing measurably better manager feedback than larger, more resourced orgs like CXI (85%) and even MXO (87%), all well above the Company baseline of 80%. This isn't a scale artifact — it's a leadership behavior pattern that other orgs can adopt without needing LABS' headcount. <strong>Action:</strong> document LABS' recognition cadence as a playbook and pilot it with CXI's at-risk leader cluster (Focal Point #4) — it's a low-cost intervention for a structural problem.</div>
+    </div>
+  </div>
+
+  <div class="fp-card" style="background:var(--sf2);border:1px solid var(--bd)">
+    <div class="fp-tag" style="background:var(--mu)">⚪ Watch</div>
+    <div>
+      <div class="fp-title" style="color:var(--tx)">Every LABS Salary metric (N=5) needs individual validation before being treated as a population signal</div>
+      <div class="fp-tx">ITS at 80% (lowest Salary score), Growth at 40% (lowest in folder), and Belonging at 64% (also lowest in folder) are all severe on paper, but at N=5 a single person's response can move the percentage by 20 points. By contrast, P's figures (N=361) carry far more statistical weight and should be treated as the more reliable Salary signal when the two diverge. This doesn't mean ignore LABS — it means the next step is 1:1 conversations, not a policy change based on the aggregate number alone.</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:1.5rem;padding-top:.7rem;border-top:1px solid var(--bd);font-size:10px;color:var(--mu);display:flex;justify-content:space-between">
+  <span>Engagement Q226 · Drive "Engagement Q2 2026 – June 29"</span>
+  <span>No individual names · Org labels only</span>
+</div>
+</div>
+
+<script>
+const dk=matchMedia('(prefers-color-scheme:dark)').matches;
+const ts=dk?'#c3c2b7':'#52514e',gc=dk?'#2c2c2a':'#e2e1dc',tp=dk?'#fff':'#1a1917';
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+const C={mxo:'#2260C4',cxi:'#0E8A5F',labs:'#5B38B5',p:'#B8860B',co:'#888780'};
+
+function mkLeg(elId,series){const el=document.getElementById(elId);if(!el)return;el.innerHTML='';series.forEach(s=>{const sp=document.createElement('span');sp.style.cssText='display:flex;align-items:center;gap:3px';sp.innerHTML=`<span class="ld" style="background:${s.c}"></span>${s.l}`;el.appendChild(sp);});}
+
+function switchGWTable(mode){
+  const bh=document.getElementById('gwbtn-h');
+  const bs=document.getElementById('gwbtn-s');
+  const th=document.getElementById('gw-table-h');
+  const ts2=document.getElementById('gw-table-s');
+  if(mode==='h'){
+    bh.classList.add('act'); bs.classList.remove('act');
+    th.style.display='block'; ts2.style.display='none';
+  } else {
+    bs.classList.add('act'); bh.classList.remove('act');
+    ts2.style.display='block'; th.style.display='none';
+  }
+}
+
+// ── PARTICIPATION RATE COMPARATIVE LINE CHART ──────────────────
+const PART_DATA = {
+  h: {
+    labels: ['Participation', 'ITS >1yr', 'WES', 'Growth', 'Mgr Feedback', 'Belonging'],
+    series: [
+      {l:'Company', d:[87,76,8,57,80,78], c:C.co, dash:[6,4], w:2, note:'N=2,083'},
+      {l:'MXO H ', d:[99,84,39,57,87,74], c:C.mxo, dash:[], w:2.5, note:'N=515'},
+      {l:'CXI H ', d:[100,90,24,67,85,80], c:C.cxi, dash:[], w:2.5, note:'N=981'},
+      {l:'LABS H ', d:[100,89,30,72,91,68], c:C.labs, dash:[], w:2.5, note:'N=47'},
+    ],
+    yMin:0, yMax:105,
+    note:'WES shown on real scale (0–100). Company benchmark Q226: Participation 87%, ITS 76%, WES 8, Growth 57%, Mgr 80%, Belonging 78%. POS (N=24, 100%) under MXO scope. P has no Hourly equivalent.'
+  },
+  s: {
+    labels: ['Participation', 'ITS >1yr', 'WES', 'Growth', 'Mgr Feedback', 'Belonging'],
+    series: [
+      {l:'Company', d:[87,76,8,57,80,78], c:C.co, dash:[6,4], w:2, note:'N=2,083'},
+      {l:'MXO S ', d:[98,88,25,63,81,71], c:C.mxo, dash:[], w:2.5, note:'N=48'},
+      {l:'CXI S ', d:[99,88,7,74,75,76], c:C.cxi, dash:[], w:2.5, note:'N=67'},
+      {l:'LABS S*', d:[100,80,20,40,80,64], c:C.labs, dash:[4,3], w:2, note:'N=5*'},
+      {l:'P ', d:[98,92,29,67,84,82], c:C.p, dash:[], w:2.5, note:'N=361'},
+    ],
+    yMin:0, yMax:105,
+    note:'*LABS S N=5 — validate 1:1. CXI S: WES=7 is the most critical point in the folder. P is the largest Salary org (N=361) and the de-facto Salary benchmark. Company is the identical company-wide benchmark used in the Hourly view (same figures, no Salary-specific split).'
+  }
+};
+let partChartInst=null;
+
+function buildPartChart(mode){
+  const d=PART_DATA[mode];
+  if(partChartInst){partChartInst.destroy();}
+  const opts={
+    responsive:true, maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        bodyFont:{size:10}, titleFont:{size:10.5,weight:'bold'},
+        callbacks:{
+          label:c=>{
+            const s=d.series[c.datasetIndex];
+            const lbl=d.labels[c.dataIndex];
+            const unit = lbl==='WES'?'' :'%';
+            return ` ${s.l}: ${c.parsed.y}${unit}`;
+          }
+        }
+      }
+    },
+    scales:{
+      x:{ticks:{color:ts,font:{size:10.5},autoSkip:false},grid:{color:gc}},
+      y:{min:d.yMin,max:d.yMax,ticks:{color:ts,font:{size:9},callback:v=>v},grid:{color:gc}}
+    }
+  };
+  const datasets = d.series.map(s=>({
+    label:s.l,
+    data:s.d,
+    borderColor:s.c,
+    backgroundColor:s.c+'15',
+    borderWidth:s.w,
+    borderDash:s.dash||[],
+    pointRadius:5,
+    pointHoverRadius:8,
+    pointBackgroundColor:s.c,
+    pointBorderColor:'#fff',
+    pointBorderWidth:1.5,
+    fill:false,
+    tension:.25
+  }));
+  partChartInst=new Chart(document.getElementById('c-part'),{
+    type:'line', data:{labels:d.labels, datasets}, options:opts
+  });
+  const leg=document.getElementById('leg-part');
+  leg.innerHTML='';
+  d.series.forEach(s=>{
+    const sp=document.createElement('span');
+    sp.style.cssText='display:flex;align-items:center;gap:3px';
+    const dash = s.dash&&s.dash.length ? ' ···' : '';
+    sp.innerHTML=`<span class="ld" style="background:${s.c}"></span>${s.l}${dash} <span style="color:var(--mu);font-size:9px">${s.note}</span>`;
+    leg.appendChild(sp);
+  });
+}
+
+function switchPartChart(mode){
+  const ph=document.getElementById('pbtn-h');
+  const ps=document.getElementById('pbtn-s');
+  const kh=document.getElementById('part-kpi-h');
+  const ks=document.getElementById('part-kpi-s');
+  if(mode==='h'){
+    ph.classList.add('act'); ps.classList.remove('act');
+    kh.style.display='grid'; ks.style.display='none';
+  } else {
+    ps.classList.add('act'); ph.classList.remove('act');
+    ks.style.display='grid'; kh.style.display='none';
+  }
+  buildPartChart(mode);
+}
+
+// ── GENERAL COMPARATIVE LINE CHART (ITS/Growth/Mgr/Belonging) ──
+const GEN_DATA = {
+  h: {
+    lbl:['ITS >1yr','Career Growth','Mgr Feedback','Belonging'],
+    series:[
+      {l:'Company',d:[76,57,80,78],c:C.co,dash:[6,4],w:2},
+      {l:'MXO H',d:[84,57,87,74],c:C.mxo,w:2.5},
+      {l:'CXI H',d:[90,67,85,80],c:C.cxi,w:2.5},
+      {l:'LABS H',d:[89,72,91,68],c:C.labs,w:2.5},
+    ]
+  },
+  s: {
+    lbl:['WES','ITS >1yr','Career Growth','Mgr Feedback','Belonging','AI Daily','AI Fluency'],
+    series:[
+      {l:'Company',d:[8,76,57,80,78,null,null],c:C.co,dash:[6,4],w:2},
+      {l:'MXO S',d:[25,88,63,81,71,88,100],c:C.mxo,w:2.5},
+      {l:'CXI S',d:[7,88,74,75,76,69,96],c:C.cxi,w:2.5},
+      {l:'LABS S*',d:[20,80,40,80,64,60,100],c:C.labs,w:2,dash:[4,3]},
+      {l:'P',d:[29,92,67,84,82,76,96],c:C.p,w:2.5},
+    ]
+  }
+};
+let genChartInst=null;
+
+function buildGenChart(mode){
+  const d=GEN_DATA[mode];
+  const lineOpts={responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{bodyFont:{size:10},titleFont:{size:10},
+      callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}${mode==='s'&&c.dataIndex===0?' (WES)':'%'}`}}},
+    scales:{
+      x:{ticks:{color:ts,font:{size:10},autoSkip:false},grid:{color:gc}},
+      y:{min:0,max:105,ticks:{color:ts,font:{size:9},callback:v=>v+'%'},grid:{color:gc}}
+    }
+  };
+  if(genChartInst){genChartInst.destroy();}
+  genChartInst=new Chart(document.getElementById('c-gen'),{
+    type:'line',
+    data:{labels:d.lbl,datasets:d.series.map(x=>({
+      label:x.l,data:x.d,borderColor:x.c,backgroundColor:x.c+'18',
+      borderWidth:x.w||2,pointRadius:5,pointHoverRadius:7,
+      borderDash:x.dash||[],fill:false,tension:.25,spanGaps:false
+    }))},
+    options:lineOpts
+  });
+  mkLeg('leg-gen',d.series);
+}
+
+function switchGenChart(mode){
+  const bh=document.getElementById('btn-h');
+  const bs=document.getElementById('btn-s');
+  if(mode==='h'){
+    bh.classList.add('act'); bs.classList.remove('act');
+    document.getElementById('gen-insights-h').style.display='grid';
+    document.getElementById('gen-insights-s').style.display='none';
+  } else {
+    bs.classList.add('act'); bh.classList.remove('act');
+    document.getElementById('gen-insights-h').style.display='none';
+    document.getElementById('gen-insights-s').style.display='grid';
+  }
+  buildGenChart(mode);
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  buildPartChart('h');
+  buildGenChart('h');
+});
+</script>
+</body>
+</html>
