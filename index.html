@@ -26,8 +26,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .ld{width:9px;height:9px;border-radius:2px;display:inline-block;vertical-align:middle;margin-right:2px}
 .tw{background:var(--sf);border-radius:10px;border:1px solid var(--bd);overflow:hidden;margin-bottom:.7rem}
 table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:fixed}
-th{font-size:10px;font-weight:600;color:var(--mu);text-align:left;padding:5px 7px;border-bottom:1px solid var(--bd);background:var(--sf2)}
-td{padding:4.5px 7px;border-bottom:.5px solid var(--bd);color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+th{font-size:10px;font-weight:600;color:var(--mu);text-align:left;padding:5px 7px;border-bottom:1px solid var(--bd);background:var(--sf2);white-space:normal;overflow:visible;text-overflow:clip;word-break:break-word;overflow-wrap:anywhere}
+td{padding:4.5px 7px;border-bottom:.5px solid var(--bd);color:var(--tx);white-space:normal;overflow:visible;text-overflow:clip;word-break:break-word;overflow-wrap:anywhere}
 tr:last-child td{border-bottom:none}
 .nr{text-align:right;font-variant-numeric:tabular-nums}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -38,7 +38,7 @@ tr:last-child td{border-bottom:none}
 .cbar-wrap{flex:1;background:var(--sf2);border-radius:3px;height:16px;position:relative;overflow:hidden}
 .cbar-fill{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:4px}
 .cbar-val{font-size:10px;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
-.cbar-co{flex-shrink:0;font-size:9.5px;color:var(--mu);width:84px;text-align:left;white-space:nowrap}
+.cbar-co{flex-shrink:0;font-size:9.5px;color:var(--mu);width:84px;text-align:left;white-space:normal;overflow-wrap:anywhere}
 .cbar-co strong{color:var(--co);font-weight:700}
 .split-insight{font-size:10.5px;line-height:1.55;color:var(--t2);background:var(--sf2);border-radius:7px;padding:.5rem .65rem;margin-bottom:.65rem}
 .split-insight strong{font-weight:700}
@@ -48,7 +48,7 @@ tr:last-child td{border-bottom:none}
 .gen-ins-lb{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.25rem}
 .gen-ins-tx{font-size:11px;color:var(--t2);line-height:1.45}
 .fp-card{border-radius:9px;padding:.6rem .85rem;display:flex;gap:10px}
-.fp-tag{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px;border-radius:12px;align-self:flex-start;white-space:nowrap}
+.fp-tag{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px;border-radius:12px;align-self:flex-start;white-space:normal;overflow-wrap:anywhere}
 .fp-title{font-size:11.5px;font-weight:700;margin-bottom:.2rem}
 .fp-tx{font-size:11px;color:var(--t2);line-height:1.45}
 .vb-section{background:#F4F2EE;border:2px solid #D8D4CC;border-radius:16px;padding:1.1rem 1.2rem 1.3rem;margin:1.5rem 0}
@@ -73,6 +73,16 @@ tr:last-child td{border-bottom:none}
   overflow-wrap: anywhere;
 }
 .gw-wrap td{
+  line-height: 1.55;
+}
+
+
+.narrative-table td:last-child,.narrative-table th:last-child{
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
   line-height: 1.55;
 }
 
@@ -471,7 +481,7 @@ tr:last-child td{border-bottom:none}
       <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Work Effectiveness</span>
       <span style="font-size:10px;color:var(--mu)">MXO: 882 · CXI: 1,678 · LABS: key verbatims below</span>
     </div>
-    <table><colgroup><col style="width:18%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:26%"></colgroup>
+    <table class="narrative-table"><colgroup><col style="width:16%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:44%"></colgroup>
       <tr><th>Sentiment</th><th class="nr" style="color:var(--mxo)">MXO H #</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI H #</th><th class="nr" style="color:var(--cxi)">CXI %</th><th>What the data says</th></tr>
       <tr><td>Easier ✅</td><td class="nr" style="color:var(--mxo)">557</td><td class="nr" style="color:var(--grn);font-weight:700">63.2%</td><td class="nr" style="color:var(--cxi)">922</td><td class="nr" style="color:var(--ora)">54.9%</td><td style="font-size:10.5px">MXO +8.3pts more positive. LABS: AI tools (Claude Code) making work easier in new LOB context.</td></tr>
       <tr style="background:var(--sf2)"><td>No change</td><td class="nr">122</td><td class="nr">13.8%</td><td class="nr">235</td><td class="nr">14.0%</td><td style="font-size:10.5px">Equal — neutral voice consistent across both orgs.</td></tr>
@@ -484,7 +494,7 @@ tr:last-child td{border-bottom:none}
       <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Growth Opportunities</span>
       <span style="font-size:10px;color:var(--mu)">MXO: 253 · CXI: 453 · LABS H: 11 visible comments</span>
     </div>
-    <table><colgroup><col style="width:18%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:26%"></colgroup>
+    <table class="narrative-table"><colgroup><col style="width:16%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:44%"></colgroup>
       <tr><th>Sentiment</th><th class="nr" style="color:var(--mxo)">MXO H #</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI H #</th><th class="nr" style="color:var(--cxi)">CXI %</th><th>What the data says</th></tr>
       <tr><td>Favorable ✅</td><td class="nr">132</td><td class="nr" style="color:var(--ora)">52.2%</td><td class="nr">296</td><td class="nr" style="color:var(--grn);font-weight:700">65.3%</td><td style="font-size:10.5px">CXI +13.1pts more positive on growth. LABS: split — new LOB opportunity perception vs "unclear path to better positions."</td></tr>
       <tr style="background:var(--sf2)"><td>Neutral</td><td class="nr">61</td><td class="nr">24.1%</td><td class="nr">94</td><td class="nr">20.8%</td><td style="font-size:10.5px">Similar. LABS also has neutral comments ("not currently looking for growth").</td></tr>
@@ -497,7 +507,7 @@ tr:last-child td{border-bottom:none}
       <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Integration (cross-border, org change, ambiguity)</span>
       <span style="font-size:10px;color:var(--mu)">MXO: 388 · CXI: 706 · LABS: explicitly shares MX-US comments</span>
     </div>
-    <table><colgroup><col style="width:22%"><col style="width:13%"><col style="width:13%"><col style="width:13%"><col style="width:13%"><col style="width:26%"></colgroup>
+    <table class="narrative-table"><colgroup><col style="width:18%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:42%"></colgroup>
       <tr><th>Sub-category</th><th class="nr" style="color:var(--mxo)">MXO H #</th><th class="nr" style="color:var(--mxo)">%</th><th class="nr" style="color:var(--cxi)">CXI H #</th><th class="nr" style="color:var(--cxi)">%</th><th>What the data says</th></tr>
       <tr><td>Org change / understanding</td><td class="nr">121</td><td class="nr">31.2%</td><td class="nr">281</td><td class="nr" style="color:var(--red)">39.8%</td><td style="font-size:10.5px"><strong>CXI +8.6pts.</strong> THQ, tool switches, and directive changes dominate CXI org-change narrative.</td></tr>
       <tr style="background:var(--sf2)"><td>Collaboration</td><td class="nr">87</td><td class="nr" style="color:var(--grn)">22.4%</td><td class="nr">122</td><td class="nr">17.3%</td><td style="font-size:10.5px">MXO +5.1pts more collaboration comments — more team-oriented narrative.</td></tr>
@@ -509,7 +519,7 @@ tr:last-child td{border-bottom:none}
   <div class="g2">
     <div class="tw">
       <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd)"><span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">Intent-to-Stay</span></div>
-      <table><colgroup><col style="width:30%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:19%"></colgroup>
+      <table class="narrative-table"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:16%"><col style="width:16%"><col style="width:28%"></colgroup>
         <tr><th>Category</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI %</th><th class="nr" style="color:var(--labs)">LABS</th><th>Key gap</th></tr>
         <tr><td>ITS &gt;1yr ✅</td><td class="nr" style="color:var(--ora)">83.9%</td><td class="nr" style="color:var(--grn);font-weight:700">89.8%</td><td class="nr">100%*</td><td style="font-size:10px">MXO lags CXI by 5.9pts. LABS S ITS=80% — warning signal.</td></tr>
         <tr class="tr-b"><td>ITS &lt;1yr ❌</td><td class="nr" style="color:var(--red);font-weight:700">16.1%</td><td class="nr" style="color:var(--ora)">10.2%</td><td class="nr">0%*</td><td style="font-size:10px">MXO +5.9pts flight risk in comments. Concentrated in at-risk leader sub-teams.</td></tr>
@@ -518,7 +528,7 @@ tr:last-child td{border-bottom:none}
     </div>
     <div class="tw">
       <div style="background:var(--sf2);padding:5px 8px;border-bottom:1px solid var(--bd)"><span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--tx)">DEI / Belonging</span></div>
-      <table><colgroup><col style="width:30%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:19%"></colgroup>
+      <table class="narrative-table"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:16%"><col style="width:16%"><col style="width:28%"></colgroup>
         <tr><th>Category</th><th class="nr" style="color:var(--mxo)">MXO %</th><th class="nr" style="color:var(--cxi)">CXI %</th><th class="nr" style="color:var(--labs)">LABS</th><th>Key gap</th></tr>
         <tr><td>Favorable ✅</td><td class="nr" style="color:var(--ora)">66.7%</td><td class="nr" style="color:var(--grn);font-weight:700">77.2%</td><td class="nr">~75%</td><td style="font-size:10px">CXI +10.5pts more positive DEI comments. Consistent with score gap (74% vs 80%).</td></tr>
         <tr class="tr-b"><td>Unfavorable ❌</td><td class="nr" style="color:var(--red);font-weight:700">15.5%</td><td class="nr" style="color:var(--ora)">9.0%</td><td class="nr">~17%</td><td style="font-size:10px">MXO +6.5pts, LABS slightly higher — both driven by recognition gaps and instability.</td></tr>
@@ -536,7 +546,7 @@ tr:last-child td{border-bottom:none}
       <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--p)">AI Fluency — Limited vs Moderate</span>
       <span style="font-size:10px;color:var(--mu)">Direct read from Prabir Organization Comments S.xlsx, ai fluency topic column</span>
     </div>
-    <table class="wrap-table"><colgroup><col style="width:22%"><col style="width:78%"></colgroup>
+    <table class="wrap-table narrative-table"><colgroup><col style="width:22%"><col style="width:78%"></colgroup>
       <tr><th>Category</th><th>What the verbatims say</th></tr>
       <tr><td style="font-size:10.5px;color:var(--red);font-weight:700">Limited</td><td style="font-size:10.5px">Recurring theme is tool-switching fatigue from constantly changing AI directives: <em>"every week someone is using a new AI different from the one used the previous week... this frequent change in AI tools poses a mind blocker for me as I cannot move at that very fast pace."</em> Other comments express distrust in AI accuracy for grading/QA tasks and a preference to "do things myself." This matches the THQ-driven friction pattern also seen in CXI's WES collapse — directive instability, not capability gaps, is the blocker.</td></tr>
       <tr style="background:var(--sf2)"><td style="font-size:10.5px;color:var(--grn);font-weight:700">Moderate</td><td style="font-size:10.5px">Several comments describe AI as already integrated into daily workflows — drafting shift-bid documentation, improving wording in OM/peer/agent communication, structuring emails. One verbatim explicitly calls out an organizational gap: <em>"My org and the company have AI initiatives teams, but neither has been proactive in reaching out to the business to bridge the gap between strategy and daily execution."</em> This is consistent with P's high AI Fluency (96%) sitting well above its own Daily usage (76%) — the capability is there, but adoption depends on top-down clarity that hasn't fully arrived.</td></tr>
